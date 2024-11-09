@@ -1,0 +1,1 @@
+all you do is to just double click the Builder.bat file to run the whole thing, it should download the modules/packages and also run the gui.py python file and from there you can do what you want![image](https://github.com/user-attachments/assets/49b42894-b5b0-44bb-a3b3-d44d77da6189)
